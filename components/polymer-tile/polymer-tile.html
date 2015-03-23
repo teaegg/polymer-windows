@@ -1,0 +1,163 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+A tile component likes windows menu.
+
+##### Example
+
+    <polymer-tile fit>
+      <div tile>
+        <div tile style="background: yellow;"></div>
+        <div tile style="background: red;"></div>
+      </div>
+      <div tile style="background: orange;"></div>
+      <div tile double style="background: purple;"></div>
+      <div tile style="background: orange;"></div>
+    </polymer-tile>
+
+@element polymer-tile
+@blurb A tile component likes windows menu.
+@status alpha
+@homepage https://github.com/teaegg/polymer-tile
+-->
+<polymer-element name="polymer-tile">
+
+  <template>
+
+    <style>
+      :host {
+        display: block;
+      }
+
+      polyfill-next-selector { content: ':host tile'; }
+      ::content[select="[tile]"] > * {
+        box-sizing: border-box;
+        position: relative;
+      }
+    </style>
+
+    <content select="[tile]" id="tiles"></content>
+    <content></content>
+    <div id="placeholder"></div>
+
+  </template>
+
+  <script>
+    Polymer({
+
+      publish: {
+        /**
+         * when autosize is false, tileSize and gutter will not work. you can controll the tile size and position by css.
+         *
+         * @attribute autosize
+         * @type bool
+         * @default true
+         */
+        autosize: true,
+
+        /**
+         * Default size of a "&lt;tile&gt;&lt;/tile&gt;".
+         *
+         * @attribute tileSize
+         * @type string
+         * @default '120px'
+         */
+        tileSize: '120px',
+
+        /**
+         * The `gutter` attribute sets the margin between each tile.
+         *
+         * @attribute gutter
+         * @type string
+         * @default '4px'
+         */
+        gutter: '4px',
+
+        /**
+         * Orientation of the scroller to be observed (`v` for vertical, `h` for horizontal)
+         *
+         * @attribute orient
+         * @type string
+         * @default 'h'
+         */
+        orient: 'h',
+
+        /**
+        * `tiles` is a property that contains all tile nodes.
+        *
+        * @property tiles
+        * @type array
+        * @default null
+        */
+        tiles: []
+      },
+
+      observe: {
+        'tileSize gutter orient': 'setup'
+      },
+
+      scrollHandler: function(e) {
+        e.preventDefault();
+        var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+        if(this.orient == 'h')
+          this.scrollLeft -= (delta*100);
+        else
+          this.scrollTop -= (delta*100);
+      },
+
+      ready: function() {
+        this._scrollHandler = this.scrollHandler.bind(this);
+        this.addEventListener('mousewheel', this._scrollHandler);
+        this.setup();
+      },
+
+      detached: function() {
+        // Remove listener
+        this.removeEventListener('mousewheel', this._scrollHandler);
+      },
+
+      setup: function() {
+        // setup outer container
+        this.setAttribute('layout', '');
+        this.setAttribute(this.orient == 'h' ? 'vertical' : 'horizontal', '');
+        this.setAttribute('wrap', '');
+        this.style.overflowX = this.orient == 'h' ? 'auto' : 'hidden';
+        this.style.overflowY = this.orient == 'v' ? 'auto' : 'hidden';
+        if(this.orient == 'h')
+          this.$.placeholder.style.marginRight = '100%';
+        else
+          this.$.placeholder.style.marginBottom = '100%';
+        // caculate the size of each tile
+        if(!this.autosize)
+          return;
+        var tileSize = parseInt(this.tileSize, 10);
+        var gutter = parseInt(this.gutter, 10);
+        var doubleSize = tileSize * 2 + gutter * 2  + 'px';
+
+        this.tiles = [];
+        var outer = this.$.tiles.getDistributedNodes();
+        for(var i = 0; i < outer.length; i++) {
+          var inner = outer[i].querySelectorAll('[tile]');
+          if(inner.length > 0) {
+            outer[i].setAttribute('layout', '');
+            outer[i].setAttribute('horizontal', '');
+            outer[i].setAttribute('justified', '');
+            for(var j = 0; j < inner.length; j++) {
+              inner[j].style.width = this.tileSize;
+              inner[j].style.height = this.tileSize;
+              this.tiles.push(inner[j]);
+            }
+          } else {
+              this.tiles.push(outer[i]);
+          }
+          outer[i].style.height = outer[i].attributes['double'] ? doubleSize : this.tileSize;
+          outer[i].style.margin = this.gutter;
+          outer[i].style.width = doubleSize;
+        }
+      }
+
+    });
+
+  </script>
+
+</polymer-element>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>polymer-tile-window Demo</title>
+
+  <script src="../webcomponentsjs/webcomponents.min.js"></script>
+  <link rel="import" href="polymer-tile-window.html">
+
+  <style>
+    body /deep/ polymer-tile {
+      padding: 3% 10% 3% 10%;
+    }
+
+    .demo {
+      width: 700px;
+      height: 400px;
+      margin: 50px auto;
+      position: relative;
+    }
+  </style>
+
+</head>
+<body fullbleed unresolved>
+  <h1>polymer-tile-window DEMO</h1>
+  <div class="demo">
+
+  <polymer-tile-window style="background: blue;" fit transitions="hero-transition">
+    <section>
+      <polymer-tile fit> 
+        <div tile>
+          <div tile style="background: yellow;"></div>
+          <div tile style="background: red;" linkto="popup2" hero-id="popup2">
+            <button hero-id="btn2">click me</button>
+          <div hero-i="popup"></div>
+          </div>
+        </div>
+        <div tile style="background: orange;" linkto="popup1" hero-id="popup1">
+            <button hero-id="btn1">click me</button>
+        </div>
+        <div tile double style="background: purple;"></div>
+      </polymer-tile>
+    </section>
+
+    <section window id="popup1" >
+      <div fit style="background: orange;" hero-id="popup1" hero>
+        <button closeButton hero-id="btn1">click me</button>
+      </div>
+    </section>
+
+    <section window id="popup2">
+      <div fit style="background: red;" hero-id="popup2" hero>
+        <button closeButton hero-id="btn2">click me</button>
+      </div>
+    </section>
+  </polymer-tile-window>
+  
+  </div>
+</body>
+</html>

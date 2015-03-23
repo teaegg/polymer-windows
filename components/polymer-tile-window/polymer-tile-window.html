@@ -1,0 +1,140 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer-tile/polymer-tile.html">
+<link rel="import" href="../core-animated-pages/core-animated-pages.html">
+
+<!--
+polymer-tile-window
+
+##### Example
+
+    <polymer-tile-window style="background: blue;" transitions="hero-transition">
+    
+      Do not set 'hero' attribute to any tag for first section, 
+      the tile-window will automatically controll 'hero' for you.
+      'linkto' attribute will make the tile links to a window in another section by id.
+      clicking 'closeButton' will call the 'restore' method.
+
+      <section>
+        <polymer-tile fit> 
+          <div tile>
+            <div tile style="background: yellow;"></div>
+            <div tile style="background: red;" linkto="popup2" hero-id="popup2">
+            <div hero-i="popup"></div>
+            </div>
+          </div>
+          <div tile style="background: orange;" linkto="popup1" hero-id="popup1">
+              clickable
+          </div>
+          <div tile double style="background: purple;"></div>
+        </polymer-tile>
+      </section>
+
+      <section window id="popup1" >
+        <div fit style="background: orange;" hero-id="popup1" hero>
+          <button closeButton>close</button>
+        </div>
+      </section>
+
+      <section window id="popup2">
+        <div fit style="background: red;" hero-id="popup2" hero>
+          <button closeButton>close</button>
+        </div>
+      </section>
+    </polymer-tile-window>
+
+@element polymer-tile-window
+@extends core-animated-pages
+@blurb polymer-tile-window.
+@status alpha
+@homepage https://github.com/teaegg/polymer-tile-window
+-->
+<polymer-element name="polymer-tile-window" extends="core-animated-pages"
+valueattr="id">
+
+  <template>
+      <shadow></shadow>
+  </template>
+
+  <script>
+    Polymer({
+
+      ready: function() {
+        this.super();
+        this.addEventListener('core-animated-pages-transition-prepare', this.beforeTransition)
+        this.addEventListener('core-animated-pages-transition-end', this.afterTransition)
+        this._tileClickHandler = this.tileClickHandler.bind(this);
+        this._restore = this.restore.bind(this);
+        // this.$.tileContainer.setup();
+        this.content = this.$.items.getDistributedNodes();
+        this.registerHandler();
+      },
+
+      detached: function() {
+        this.super();
+        // Remove listener
+        this.removeEventListener('core-animated-pages-transition-prepare', this.beforeTransition)
+        this.removeEventListener('core-animated-pages-transition-end', this.afterTransition)
+        this.detaching = true;
+        this.registerHandler();
+      },
+
+      tileClickHandler: function(e) {
+        this.selected = e.currentTarget.getAttribute('linkto');
+      },
+
+      /**
+      * Navigate to the startup page.
+      *
+      * @method restore
+      * @param none
+      * @return none
+      */
+      restore: function(e) {
+        this.selected = 0;
+      },
+      
+      beforeTransition: function() {
+        var linkto = this.selected || this.lastSelected;
+        var query = '[linkto="' + linkto + '"][hero-id], [linkto="' + linkto + '"] [hero-id]' ;
+        this.heros = this.content[0].querySelectorAll(query);
+        for(var i = 0; i < this.heros.length; i++) {
+          this.heros[i].setAttribute('hero', '');
+        }
+      },
+
+      afterTransition: function() {
+        for(var i = 0; i < this.heros.length; i++) {
+          this.heros[i].removeAttribute('hero');
+        }
+      },
+
+      registerHandler: function() {
+        for(var i = 0; i < this.content.length; i++) {
+          if(this.content[i].attributes.window) {
+            var closeBtn = this.content[i].querySelector('[closeButton]');
+            if(closeBtn) {
+              if(this.detaching)
+                closeBtn.removeEventListener('click', this._restore);
+              else
+                closeBtn.addEventListener('click', this._restore);
+            }
+          } else if(this.content[i].children[0].localName = 'polymer-tile') {
+            this.tiles = this.content[i].children[0].tiles;
+          }
+        }
+
+        for(var i = 0; i < this.tiles.length; i++) {
+          if(this.tiles[i].attributes.linkto) {
+            if(this.detaching)
+              this.tiles[i].removeEventListener('click', this._tileClickHandler);
+            else
+              this.tiles[i].addEventListener('click', this._tileClickHandler);
+          }
+        }
+      },
+
+    });
+
+  </script>
+
+</polymer-element>

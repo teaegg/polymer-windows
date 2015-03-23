@@ -1,0 +1,47 @@
+body {
+    font-family: Avenir, 'Helvetica Neue', 'Microsoft Yahei', 'Hiragino Sans GB', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif;
+    font-size: 13px;
+    color: #333;
+    margin: 0;
+    min-height: 370px;
+    background: url(images/wallpaper/1.png) no-repeat;
+    background-size: 100% 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+html /deep/ [autofocus] {
+    color: #03a9f4;
+}
+html /deep/ pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 0;
+}
+.fab {
+    background: #4285F4;
+    color: white;
+    position: absolute;
+}
+/* code-mirror start*/
+.edui-container,
+.edui-editor-body,
+.edui-body-container {
+    height: 100% !important;
+    min-height: 100% !important;
+    width: 100% !important;
+    box-sizing:border-box;
+}
+.edui-body-container {
+    padding: 50px 20px 100px 20px !important;
+}
+@media screen and (max-width: 767px) {
+    .edui-container,
+    .edui-editor-body,
+    .edui-body-container {
+        z-index: 0 !important;
+    }
+}
+/* code-mirror end*/

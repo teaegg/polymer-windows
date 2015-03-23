@@ -1,0 +1,115 @@
+:host {
+    min-height: 370px;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+.margin-l{
+    margin-left: 10px;
+}
+
+paper-spinner.white::shadow .circle {
+    border-color: white;
+}
+paper-spinner.blue::shadow .circle {
+    border-color: #4285f4;
+}
+
+paper-spinner.red::shadow .circle {
+    border-color: #db4437;
+}
+
+paper-spinner.yellow::shadow .circle {
+    border-color: #f4b400;
+}
+
+paper-spinner.green::shadow .circle {
+    border-color: #0f9d58;
+}
+
+.fab {
+    position: absolute;
+    z-index: 9999;
+    bottom: 50px;
+    right: 24px;
+    background: #FCFCFC;
+    color: #666;
+}
+.fab-active {
+    background: #259B24;
+    color: white;
+}
+
+.tall-toolbar {
+    padding: 0 5% 0 10%;
+    box-sizing: border-box;
+    width: 100%;
+    height: 20%;
+    position: absolute;
+    color: #fff;
+}
+
+.tiles-container {
+    padding: 10% 10% 5% 10%;
+}
+.news-container {
+    padding: 5% 10% 2% 10%;
+}
+
+.tile-bottom {
+    padding: 5px 15px;
+    color: #fff;
+}
+paper-item {
+    font-weight: bold;
+    font-size: 14px;
+}
+#script-panel .script-tall {
+    padding: 0 2%;
+    height: 12%;
+    color: white;
+    background: #5F3BBA;
+}
+#script-panel .script-editor-left {
+    background-color: #eee;
+    border-right: 1px solid #ddd;
+}
+#script-panel .script-editor-right {
+    background: white;
+}
+#scriptListMenu {
+    height: 100%;
+}
+code-mirror {
+    z-index:0;
+    display: none;
+    overflow: auto;
+}
+
+.dropdown {
+    color: black;
+}
+paper-icon-button,
+#functionBar paper-button {
+    color:#666;
+}
+paper-icon-button:hover,
+#functionBar paper-button:hover {
+    color:#333;
+}
+
+/*
+ news
+*/
+.horizontal-header {
+    height: 10%;
+    color: white;
+    font-size: 20px;
+    padding: 0 1% 0 10%;
+}
+
+.news-background {
+    background: url(images/wallpaper/2.png) no-repeat;
+    background-size: 100% 100%;
+}

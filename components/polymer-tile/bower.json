@@ -1,0 +1,24 @@
+{
+  "name": "polymer-tile",
+  "version": "1.0.0",
+  "authors": [
+    "teaegg"
+  ],
+  "description": "polymer-tile",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "tile"
+  ],
+  "main": "polymer-tile.html",
+  "license": "MIT",
+  "homepage": "https://github.com/teaegg/polymer-tile/",
+  "ignore": [
+    "/.*",
+    "/tests/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.5.4"
+  }
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>polymer-tile Demo</title>
+
+  <script src="../webcomponentsjs/webcomponents.min.js"></script>
+  <link rel="import" href="polymer-tile.html">
+
+  <style>
+  .container {
+  	margin:50px auto; 
+  	width:450px;
+  }
+  .demo {
+  	width:450px; 
+  	height:330px;
+  	position:relative;
+  }
+  </style>
+
+</head>
+<body fullbleed unresolved>
+
+<div class="container">
+
+  <h1>polymer-tile demo</h1>
+
+  <p>DEFAULT attributes: tileSize='120px' gutter='4px' orient='h'</p>
+  <div class="demo">
+	  <polymer-tile style="padding: 5% 10% 5% 10%;background:blue;" fit>
+		<div tile>
+			<div tile style="background: yellow;"></div>
+			<div tile style="background: red;"></div>
+		</div>
+		<div tile style="background: orange;"></div>
+		<div tile double style="background: purple;"></div>
+		<div tile style="background: orange;"></div>
+		<div tile style="background: red;"></div>
+	  </polymer-tile>
+  </div>
+
+  <p>CUSTOM attributes: tileSize='80px' gutter='10px' orient='v'</p>
+  <div class="demo">
+	  <polymer-tile style="padding: 2% 10% 2% 10%;background:gray;" fit tileSize='80px' gutter='10px' orient='v'>
+		<div tile>
+			<div tile style="background: yellow;"></div>
+			<div tile style="background: red;"></div>
+		</div>
+		<div tile style="background: orange;"></div>
+		<div tile double style="background: purple;"></div>
+	  </polymer-tile>
+  </div>
+
+</div>
+
+</body>
+</html>

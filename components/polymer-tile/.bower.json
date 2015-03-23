@@ -1,0 +1,32 @@
+{
+  "name": "polymer-tile",
+  "authors": [
+    "teaegg"
+  ],
+  "description": "polymer-tile",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "tile"
+  ],
+  "main": "polymer-tile.html",
+  "license": "MIT",
+  "homepage": "https://github.com/teaegg/polymer-tile/",
+  "ignore": [
+    "/.*",
+    "/tests/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.5.4"
+  },
+  "_release": "655c20658e",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "655c20658e1a186964ff85ce1694ad55673bbb86"
+  },
+  "_source": "git://github.com/teaegg/polymer-tile.git",
+  "_target": "*",
+  "_originalSource": "git://github.com/teaegg/polymer-tile.git"
+}
