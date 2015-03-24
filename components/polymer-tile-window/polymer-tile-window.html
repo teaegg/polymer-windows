@@ -60,8 +60,8 @@ valueattr="id">
 
       ready: function() {
         this.super();
-        this.addEventListener('core-animated-pages-transition-prepare', this.beforeTransition)
-        this.addEventListener('core-animated-pages-transition-end', this.afterTransition)
+        this.addEventListener('core-animated-pages-transition-prepare', this.beforeTransition);
+        this.addEventListener('core-animated-pages-transition-end', this.afterTransition);
         this._tileClickHandler = this.tileClickHandler.bind(this);
         this._restore = this.restore.bind(this);
         // this.$.tileContainer.setup();
@@ -72,8 +72,8 @@ valueattr="id">
       detached: function() {
         this.super();
         // Remove listener
-        this.removeEventListener('core-animated-pages-transition-prepare', this.beforeTransition)
-        this.removeEventListener('core-animated-pages-transition-end', this.afterTransition)
+        this.removeEventListener('core-animated-pages-transition-prepare', this.beforeTransition);
+        this.removeEventListener('core-animated-pages-transition-end', this.afterTransition);
         this.detaching = true;
         this.registerHandler();
       },
@@ -118,17 +118,17 @@ valueattr="id">
               else
                 closeBtn.addEventListener('click', this._restore);
             }
-          } else if(this.content[i].children[0].localName = 'polymer-tile') {
+          } else if(this.content[i].children[0].localName == 'polymer-tile') {
             this.tiles = this.content[i].children[0].tiles;
           }
         }
 
-        for(var i = 0; i < this.tiles.length; i++) {
-          if(this.tiles[i].attributes.linkto) {
+        for(var j = 0; j < this.tiles.length; j++) {
+          if(this.tiles[j].attributes.linkto) {
             if(this.detaching)
-              this.tiles[i].removeEventListener('click', this._tileClickHandler);
+              this.tiles[j].removeEventListener('click', this._tileClickHandler);
             else
-              this.tiles[i].addEventListener('click', this._tileClickHandler);
+              this.tiles[j].addEventListener('click', this._tileClickHandler);
           }
         }
       },

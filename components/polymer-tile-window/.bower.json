@@ -1,5 +1,6 @@
 {
   "name": "polymer-tile-window",
+  "version": "1.0.0",
   "authors": [
     "teaegg"
   ],
@@ -23,14 +24,13 @@
     "polymer-tile": "git://github.com/teaegg/polymer-tile.git",
     "core-animated-pages": "Polymer/core-animated-pages#~0.5.5"
   },
-  "_release": "bee0067cda",
+  "_release": "1.0.0",
   "_resolution": {
-    "type": "branch",
-    "branch": "master",
-    "commit": "bee0067cdad793dfc99848f720e58a30850040bf"
+    "type": "version",
+    "tag": "1.0.0",
+    "commit": "1988b27111944de18344d61dbc31045feab2693d"
   },
   "_source": "git://github.com/teaegg/polymer-tile-window.git",
-  "_target": "*",
-  "_originalSource": "git://github.com/teaegg/polymer-tile-window.git",
-  "_direct": true
+  "_target": "~1.0.0",
+  "_originalSource": "teaegg/polymer-tile-window"
 }
