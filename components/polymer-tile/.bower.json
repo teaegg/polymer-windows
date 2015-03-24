@@ -25,7 +25,7 @@
   "_resolution": {
     "type": "version",
     "tag": "1.0.1",
-    "commit": "a121da5862d1d215fa42bdd9a9058c7769681c41"
+    "commit": "56b6d2c36614979a498e61c0d382135019664710"
   },
   "_source": "git://github.com/teaegg/polymer-tile.git",
   "_target": "~1.0.1",
