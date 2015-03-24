@@ -1,26 +1,52 @@
 <link rel="import" href="../polymer/polymer.html">
 
 <!--
-A tile component likes windows menu.
+A tile container for Polymer.
 
 ##### Example
 
+    <style>
+      .tile-1,
+      .tile-2,
+      .tile-4 {
+        box-sizing: border-box;
+        position: relative;
+      }
+      .tile-1 {
+        width: 120px;
+        height: 120px;
+        float: left;
+      }
+      .tile-2 {
+        width: 248px;
+        height: 120px;
+        margin: 4px;
+      }
+      .tile-2 .tile-1:nth-child(even) {
+        margin-left: 8px;
+      }
+      .tile-4 {
+        width: 248px;
+        height: 248px;
+        margin: 4px;
+      }
+    </style>
+
     <polymer-tile fit>
-      <div tile>
-        <div tile style="background: yellow;"></div>
-        <div tile style="background: red;"></div>
+      <div class="tile-2">
+        <div class="tile-1" style="background: yellow;"></div>
+        <div class="tile-1" style="background: red;"></div>
       </div>
-      <div tile style="background: orange;"></div>
-      <div tile double style="background: purple;"></div>
-      <div tile style="background: orange;"></div>
+      <div class="tile-2" style="background: orange;"></div>
+      <div class="tile-4" style="background: purple;"></div>
     </polymer-tile>
 
 @element polymer-tile
-@blurb A tile component likes windows menu.
-@status alpha
+@blurb A tile container for Polymer.
+@status release
 @homepage https://github.com/teaegg/polymer-tile
 -->
-<polymer-element name="polymer-tile">
+<polymer-element name="polymer-tile" attributes="orient">
 
   <template>
 
@@ -28,72 +54,33 @@ A tile component likes windows menu.
       :host {
         display: block;
       }
-
-      polyfill-next-selector { content: ':host [tile]'; }
-      ::content[select="[tile]"] > * {
-        box-sizing: border-box;
-        position: relative;
-      }
     </style>
 
-    <content select="[tile]" id="tiles"></content>
     <content></content>
     <div id="placeholder"></div>
 
   </template>
 
   <script>
-    Polymer({
+    Polymer('polymer-tile', {
 
-      publish: {
-        /**
-         * when autosize is false, tileSize and gutter will not work. you can controll the tile size and position by css.
-         *
-         * @attribute autosize
-         * @type bool
-         * @default true
-         */
-        autosize: true,
+      /**
+       * Orientation of the scroller to be observed (`v` for vertical, `h` for horizontal)
+       *
+       * @attribute orient
+       * @type string
+       * @default 'h'
+       */
+      orient: 'h',
 
-        /**
-         * Default size of a "&lt;tile&gt;&lt;/tile&gt;".
-         *
-         * @attribute tileSize
-         * @type string
-         * @default '120px'
-         */
-        tileSize: '120px',
-
-        /**
-         * The `gutter` attribute sets the margin between each tile.
-         *
-         * @attribute gutter
-         * @type string
-         * @default '4px'
-         */
-        gutter: '4px',
-
-        /**
-         * Orientation of the scroller to be observed (`v` for vertical, `h` for horizontal)
-         *
-         * @attribute orient
-         * @type string
-         * @default 'h'
-         */
-        orient: 'h',
-
-        /**
-        * `tiles` is a property that contains all tile nodes.
-        *
-        * @property tiles
-        * @type array
-        * @default null
-        */
-        tiles: []
-      },
-
-      observe: {
-        'tileSize gutter orient': 'setup'
+      orientChanged: function() {
+        this.setAttribute(this.orient == 'h' ? 'vertical' : 'horizontal', '');
+        this.style.overflowX = this.orient == 'h' ? 'auto' : 'hidden';
+        this.style.overflowY = this.orient == 'v' ? 'auto' : 'hidden';
+        if(this.orient == 'h')
+          this.$.placeholder.style.marginRight = '100%';
+        else
+          this.$.placeholder.style.marginBottom = '100%';
       },
 
       scrollHandler: function(e) {
@@ -108,52 +95,17 @@ A tile component likes windows menu.
       ready: function() {
         this._scrollHandler = this.scrollHandler.bind(this);
         this.addEventListener('mousewheel', this._scrollHandler);
-        this.setup();
+        this.addEventListener('DOMMouseScroll', this._scrollHandler);
+        // setup outer container
+        this.setAttribute('layout', '');
+        this.setAttribute('wrap', '');
+        this.orientChanged();
       },
 
       detached: function() {
         // Remove listener
         this.removeEventListener('mousewheel', this._scrollHandler);
-      },
-
-      setup: function() {
-        // setup outer container
-        this.setAttribute('layout', '');
-        this.setAttribute(this.orient == 'h' ? 'vertical' : 'horizontal', '');
-        this.setAttribute('wrap', '');
-        this.style.overflowX = this.orient == 'h' ? 'auto' : 'hidden';
-        this.style.overflowY = this.orient == 'v' ? 'auto' : 'hidden';
-        if(this.orient == 'h')
-          this.$.placeholder.style.marginRight = '100%';
-        else
-          this.$.placeholder.style.marginBottom = '100%';
-        // caculate the size of each tile
-        if(!this.autosize)
-          return;
-        var tileSize = parseInt(this.tileSize, 10);
-        var gutter = parseInt(this.gutter, 10);
-        var doubleSize = tileSize * 2 + gutter * 2  + 'px';
-
-        this.tiles = [];
-        var outer = this.$.tiles.getDistributedNodes();
-        for(var i = 0; i < outer.length; i++) {
-          var inner = outer[i].querySelectorAll('[tile]');
-          if(inner.length > 0) {
-            outer[i].setAttribute('layout', '');
-            outer[i].setAttribute('horizontal', '');
-            outer[i].setAttribute('justified', '');
-            for(var j = 0; j < inner.length; j++) {
-              inner[j].style.width = this.tileSize;
-              inner[j].style.height = this.tileSize;
-              this.tiles.push(inner[j]);
-            }
-          } else {
-              this.tiles.push(outer[i]);
-          }
-          outer[i].style.height = outer[i].attributes.double ? doubleSize : this.tileSize;
-          outer[i].style.margin = this.gutter;
-          outer[i].style.width = doubleSize;
-        }
+        this.removeEventListener('DOMMouseScroll', this._scrollHandler);
       }
 
     });

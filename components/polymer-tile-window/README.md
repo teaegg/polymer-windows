@@ -34,8 +34,39 @@ Or [download as ZIP](https://github.com/teaegg/polymer-tile-window/archive/maste
 3. Start using it!
 
     ```html
-    <polymer-tile-window style="background: blue;" transitions="hero-transition">
-    
+    <style>
+      polymer-tile {
+        padding: 5% 10% 5% 10%;background:blue;
+      }
+
+      .tile-1,
+      .tile-2,
+      .tile-4 {
+        box-sizing: border-box;
+        position: relative;
+      }
+      .tile-1 {
+        width: 120px;
+        height: 120px;
+        float: left;
+      }
+      .tile-2 {
+        width: 248px;
+        height: 120px;
+        margin: 4px;
+      }
+      .tile-2 .tile-1:nth-child(even) {
+        margin-left: 8px;
+      }
+      .tile-4 {
+        width: 248px;
+        height: 248px;
+        margin: 4px;
+      }
+    </style>
+
+    <polymer-tile-window fit transitions="hero-transition">
+
       Do not set 'hero' attribute to any tag for first section, 
       the tile-window will automatically controll 'hero' for you.
       'linkto' attribute will make the tile links to a window in another section by id.
@@ -43,28 +74,29 @@ Or [download as ZIP](https://github.com/teaegg/polymer-tile-window/archive/maste
 
       <section>
         <polymer-tile fit> 
-          <div tile>
-            <div tile style="background: yellow;"></div>
-            <div tile style="background: red;" linkto="popup2" hero-id="popup2">
+          <div class="tile-2">
+            <div class="tile-1" style="background: yellow;"></div>
+            <div class="tile-1" style="background: red;" linkto="popup2" hero-id="popup2">
+              <button hero-id="btn2">click me</button>
             <div hero-i="popup"></div>
             </div>
           </div>
-          <div tile style="background: orange;" linkto="popup1" hero-id="popup1">
-              clickable
+          <div class="tile-2" style="background: orange;" linkto="popup1" hero-id="popup1">
+              <button hero-id="btn1">click me</button>
           </div>
-          <div tile double style="background: purple;"></div>
+          <div class="tile-2" double style="background: purple;"></div>
         </polymer-tile>
       </section>
 
       <section window id="popup1" >
         <div fit style="background: orange;" hero-id="popup1" hero>
-          <button closeButton>close</button>
+          <button closeButton hero-id="btn1">click me</button>
         </div>
       </section>
 
       <section window id="popup2">
         <div fit style="background: red;" hero-id="popup2" hero>
-          <button closeButton>close</button>
+          <button closeButton hero-id="btn2">click me</button>
         </div>
       </section>
     </polymer-tile-window>

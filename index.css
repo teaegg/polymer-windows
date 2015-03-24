@@ -25,23 +25,3 @@ html /deep/ pre {
     color: white;
     position: absolute;
 }
-/* code-mirror start*/
-.edui-container,
-.edui-editor-body,
-.edui-body-container {
-    height: 100% !important;
-    min-height: 100% !important;
-    width: 100% !important;
-    box-sizing:border-box;
-}
-.edui-body-container {
-    padding: 50px 20px 100px 20px !important;
-}
-@media screen and (max-width: 767px) {
-    .edui-container,
-    .edui-editor-body,
-    .edui-body-container {
-        z-index: 0 !important;
-    }
-}
-/* code-mirror end*/

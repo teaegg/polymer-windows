@@ -1,6 +1,6 @@
 # polymer-tile
 
-A tile component using [Polymer](http://www.polymer-project.org/).
+A tile container for [Polymer](http://www.polymer-project.org/).
 
 ## Demo
 
@@ -33,14 +33,40 @@ Or [download as ZIP](https://github.com/teaegg/polymer-tile/archive/master.zip).
 3. Start using it!
 
     ```html
+    <style>
+      .tile-1,
+      .tile-2,
+      .tile-4 {
+        box-sizing: border-box;
+        position: relative;
+      }
+      .tile-1 {
+        width: 120px;
+        height: 120px;
+        float: left;
+      }
+      .tile-2 {
+        width: 248px;
+        height: 120px;
+        margin: 4px;
+      }
+      .tile-2 .tile-1:nth-child(even) {
+        margin-left: 8px;
+      }
+      .tile-4 {
+        width: 248px;
+        height: 248px;
+        margin: 4px;
+      }
+    </style>
+
     <polymer-tile fit>
-      <div tile>
-        <div tile style="background: yellow;"></div>
-        <div tile style="background: red;"></div>
+      <div class="tile-2">
+        <div class="tile-1" style="background: yellow;"></div>
+        <div class="tile-1" style="background: red;"></div>
       </div>
-      <div tile style="background: orange;"></div>
-      <div tile double style="background: purple;"></div>
-      <div tile style="background: orange;"></div>
+      <div class="tile-2" style="background: orange;"></div>
+      <div class="tile-4" style="background: purple;"></div>
     </polymer-tile>
     ```
 
@@ -48,11 +74,7 @@ Or [download as ZIP](https://github.com/teaegg/polymer-tile/archive/master.zip).
 
 Attribute  | Options                   | Default             | Description
 ---        | ---                       | ---                 | ---
-`autosize` | *bool*                    | `true`              | when autosize is false, tileSize and gutter will not work. you can controll the tile size and position by css
-`tileSize` | *string*                  | `120px`             | Default size of a "&lt;tile&gt;&lt;/tile&gt;"
-`gutter`   | *string*                  | `4px`               | The `gutter` attribute sets the margin between each tile
 `orient`   | *string*                  | `h`                 | Orientation of the scroller to be observed (`v` for vertical, `h` for horizontal)
-`tiles`    | *array*                   | `null`              | `tiles` is a property that contains all tile nodes
 
 ## Contributing
 

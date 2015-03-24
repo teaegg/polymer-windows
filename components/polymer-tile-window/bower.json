@@ -1,6 +1,6 @@
 {
   "name": "polymer-tile-window",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "authors": [
     "teaegg"
   ],
@@ -22,6 +22,6 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^0.5.4",
     "core-animated-pages": "Polymer/core-animated-pages#~0.5.5",
-    "polymer-tile": "teaegg/polymer-tile#~1.0.1"
+    "polymer-tile": "teaegg/polymer-tile#~1.0.5"
   }
 }

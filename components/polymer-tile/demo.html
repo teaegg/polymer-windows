@@ -8,15 +8,44 @@
   <link rel="import" href="polymer-tile.html">
 
   <style>
-  .container {
-  	margin:50px auto; 
-  	width:450px;
-  }
-  .demo {
-  	width:450px; 
-  	height:330px;
-  	position:relative;
-  }
+    .container {
+    	margin:50px auto; 
+    	width:450px;
+    }
+    .demo {
+    	width:450px; 
+    	height:330px;
+    	position:relative;
+    }
+
+    polymer-tile {
+      padding: 5% 10% 5% 10%;background:blue;
+    }
+
+    .tile-1,
+    .tile-2,
+    .tile-4 {
+      box-sizing: border-box;
+      position: relative;
+    }
+    .tile-1 {
+      width: 120px;
+      height: 120px;
+      float: left;
+    }
+    .tile-2 {
+      width: 248px;
+      height: 120px;
+      margin: 4px;
+    }
+    .tile-2 .tile-1:nth-child(even) {
+      margin-left: 8px;
+    }
+    .tile-4 {
+      width: 248px;
+      height: 248px;
+      margin: 4px;
+    }
   </style>
 
 </head>
@@ -26,30 +55,32 @@
 
   <h1>polymer-tile demo</h1>
 
-  <p>DEFAULT attributes: tileSize='120px' gutter='4px' orient='h'</p>
+  <p>DEFAULT attributes: orient='h'</p>
   <div class="demo">
-	  <polymer-tile style="padding: 5% 10% 5% 10%;background:blue;" fit>
-		<div tile>
-			<div tile style="background: yellow;"></div>
-			<div tile style="background: red;"></div>
-		</div>
-		<div tile style="background: orange;"></div>
-		<div tile double style="background: purple;"></div>
-		<div tile style="background: orange;"></div>
-		<div tile style="background: red;"></div>
+	  <polymer-tile fit>
+  		<div class="tile-2">
+  			<div class="tile-1" style="background: yellow;"></div>
+  			<div class="tile-1" style="background: red;"></div>
+  		</div>
+  		<div class="tile-2" style="background: orange;"></div>
+  		<div class="tile-4" style="background: purple;"></div>
+  		<div class="tile-2" style="background: orange;"></div>
+  		<div class="tile-2" style="background: red;"></div>
 	  </polymer-tile>
   </div>
 
-  <p>CUSTOM attributes: tileSize='80px' gutter='10px' orient='v'</p>
+  <p>DEFAULT attributes: orient='v'</p>
   <div class="demo">
-	  <polymer-tile style="padding: 2% 10% 2% 10%;background:gray;" fit tileSize='80px' gutter='10px' orient='v'>
-		<div tile>
-			<div tile style="background: yellow;"></div>
-			<div tile style="background: red;"></div>
-		</div>
-		<div tile style="background: orange;"></div>
-		<div tile double style="background: purple;"></div>
-	  </polymer-tile>
+    <polymer-tile fit orient="v">
+      <div class="tile-2">
+        <div class="tile-1" style="background: yellow;"></div>
+        <div class="tile-1" style="background: red;"></div>
+      </div>
+      <div class="tile-2" style="background: orange;"></div>
+      <div class="tile-4" style="background: purple;"></div>
+      <div class="tile-2" style="background: orange;"></div>
+      <div class="tile-2" style="background: red;"></div>
+    </polymer-tile>
   </div>
 
 </div>

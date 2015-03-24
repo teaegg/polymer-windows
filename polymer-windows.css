@@ -113,3 +113,29 @@ paper-icon-button:hover,
     background: url(images/wallpaper/2.png) no-repeat;
     background-size: 100% 100%;
 }
+
+/*polymer-tile*/
+.tile-1,
+.tile-2,
+.tile-4 {
+    box-sizing: border-box;
+    position: relative;
+}
+.tile-1 {
+    width: 120px;
+    height: 120px;
+    float: left;
+}
+.tile-2 {
+    width: 248px;
+    height: 120px;
+    margin: 4px;
+}
+.tile-2 .tile-1:nth-child(even) {
+    margin-left: 8px;
+}
+.tile-4 {
+    width: 248px;
+    height: 248px;
+    margin: 4px;
+}
