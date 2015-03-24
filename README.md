@@ -1,7 +1,7 @@
 # polymer-windows
 
 Front-end of single page app using [Polymer](http://www.polymer-project.org/).  
-![screenshot](https://github.com/teaegg/polymer-windows/blob/master/polymer%20windows.png)
+![screenshot](https://github.com/teaegg/polymer-windows/blob/gh-pages/polymer-windows.png)
 
 ## Demo
 
