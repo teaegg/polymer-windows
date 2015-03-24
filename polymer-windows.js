@@ -6,8 +6,7 @@ Polymer('polymer-windows', {
     page: 0,
 
     afterTransition: function(e) {
-        if ((e.target == this.$.topAnimate && e.target.lastSelected == 0) || 
-             (e.target == this.$.scriptAnimate && e.target.lastSelected == 1)) {
+        if(page == 'scriptWindow') {
             var code = this.$.codeMirror;
             code.style.display = "block";
             code.refresh();
