@@ -4,14 +4,15 @@ A tile component using [Polymer](http://www.polymer-project.org/).
 
 ## Demo
 
-[Check it live!](http://teaegg.github.io/polymer-tile-window)
+[basic](http://teaegg.github.io/polymer-tile-window)  
+[advanced](https://github.com/teaegg/polymer-windows)
 
 ## Install
 
 Install the component using [Bower](http://bower.io/):
 
 ```sh
-$ bower install git://github.com/teaegg/polymer-tile-window.git --save
+$ bower install teaegg/polymer-tile-window --save
 ```
 
 Or [download as ZIP](https://github.com/teaegg/polymer-tile-window/archive/master.zip).
